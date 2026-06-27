@@ -2,9 +2,12 @@
 
 > A secure and robust **console-based banking application** built using **Python** and **Object-Oriented Programming (OOP)** principles.
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
-![OOP](https://img.shields.io/badge/OOP-Implemented-success?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-success?style=for-the-badge)
+![OOP](https://img.shields.io/badge/OOP-Implemented-orange?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+![CLI](https://img.shields.io/badge/Application-CLI-lightgrey?style=for-the-badge)
+![Made By](https://img.shields.io/badge/Made%20By-Arshdeep%20Singh-red?style=for-the-badge)
 
 ---
 
