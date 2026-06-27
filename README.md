@@ -94,7 +94,7 @@ Banking-System/
           |                        |
           ▼                        ▼
  Perform Banking           Login Failed
-   Operations                    |
+   Operations                     |
           |                       |
           +-----------+-----------+
                       |
@@ -104,11 +104,15 @@ Banking-System/
 
 ---
 
-# 📊 Application Modules
+## 📊 Application Modules
 
-
-::contentReference[oaicite:0]{index=0}
-
+- ✅ Authentication
+- ✅ Deposit
+- ✅ Withdraw
+- ✅ Balance Inquiry
+- ✅ Account Details
+- ✅ Input Validation
+- ✅ Exception Handling
 
 ---
 
