@@ -1,161 +1,150 @@
+"""
+Bank Account System
+Author: Arsh
+Description: CLI-based Bank Account System demonstrating OOP concepts.
+"""
+
+
 class Account:
-    def __init__(self,account_no: int,full_name: str, balance: int, mobile_no: int, email: str, pin: int):
-       
-        """ Helps to store variables """
+    """Demonstrates OOP — encapsulation, private attributes, and methods."""
 
-        # Public variables
-        self.account_no = account_no
-        self.full_name = full_name
-        self.mobile_no = mobile_no
-        self.email = email
-        
-        # Truly Private variables
-        self.__balance = balance
-        self.__pin = pin
+    def __init__(self, account_no: int, full_name: str, balance: int, mobile_no: int, email: str, pin: int) -> None:
+        self.account_no: int = account_no
+        self.full_name: str = full_name
+        self.mobile_no: int = mobile_no
+        self.email: str = email
 
-    def get_valid_amt(self, prompt: str) -> int:
+        self.__balance: int = balance
+        self.__pin: int = pin
 
-        """ This helps to fix input errors """
-
-        # Repeates till get valid amount input
+    def _get_valid_amount(self, prompt: str) -> int:
+        """Loops until a valid positive integer amount is entered."""
         while True:
-            try: 
-                input_amount = int(input(prompt))
-
-                if input_amount<=0:
-                    print("Amount should be more than 0")
+            try:
+                amount = int(input(prompt))
+                if amount <= 0:
+                    print("Amount must be greater than 0.")
                     continue
-                return input_amount
-            
-            except Exception as e:
-                print(f"Error : {e}")
-    
-    def show_details(self) -> None :
-        """ Displays account details in breif """
+                return amount
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
-        # Display only details
-        print("\n--ACCOUNT DETAILS--")
-        print(f"Account No: {self.account_no}")
-        print(f"Full Name: {self.full_name}")
-        print(f"Mobile No: {self.mobile_no}")
-        print(f"Email Id: {self.email}\n")
-    
-    def deposit(self):
+    def show_details(self) -> None:
+        print("\n---- ACCOUNT DETAILS ----")
+        print(f"{'Account No':<12} {self.account_no}")
+        print(f"{'Full Name':<12} {self.full_name}")
+        print(f"{'Mobile No':<12} {self.mobile_no}")
+        print(f"{'Email':<12} {self.email}")
 
-        """ This function helps to deposit amount in Account """
+    def deposit(self) -> None:
+        print("\n---- DEPOSIT ----")
+        amount: int = self._get_valid_amount("Enter amount: ₹")
+        self.__balance += amount
+        print(f"Deposited ₹{amount} | Current Balance: ₹{self.__balance}")
 
-        print("\n--DEPOSIT--")
-        deposit_amount = self.get_valid_amt("Enter Amount: ")
-        self.__balance += deposit_amount
-        print(f"Amount Deposited\nCurrent Balance: ₹{self.__balance}")
+    def withdraw(self) -> None:
+        print("\n---- WITHDRAW ----")
+        amount: int = self._get_valid_amount("Enter amount: ₹")
+        if amount > self.__balance:
+            print("Insufficient balance.")
+            return
+        self.__balance -= amount
+        print(f"Withdrawn ₹{amount} | Balance Left: ₹{self.__balance}")
 
-    def get_bal(self) -> int:
-
-        """ This returns balance """
-
-        # Not editable
+    def get_balance(self) -> int:
         return self.__balance
 
-    def withdraw(self):
+    def login(self) -> bool:
+        """Allows 3 PIN attempts before locking out. Returns True on success."""
+        attempts: int = 0
 
-        """ This withdraw money from account. """
-        
-        print("\n--WITHDRAW--")
-        withdraw_amount = self.get_valid_amt("Enter Amount: ")
-        if self.__balance < withdraw_amount:
-            print("INSUFFICIENT BALANCE")
-            return
-        self.__balance -= withdraw_amount
-        print(f"Amount withdrawn\nBalance Left: ₹{self.__balance}")
-
-
-    def login(self)->bool:
-        
-        attempt = 0
-        """ This enter login screen """
-            
-        while True:
-            print("\n--LOGIN--")
-            if attempt >= 3:
-                print("Attempt Exceeded..")
-                return False
+        while attempts < 3:
+            print("\n---- LOGIN ----")
             try:
-                input_pin = int(input("Enter PIN: "))
-                pin_size = len(str(input_pin))
-                attempt += 1
-
-                if pin_size != 4:
-                    print("Pin should be of 4 digits")
+                pin: int = int(input("Enter PIN: "))
+                if len(str(pin)) != 4:
+                    print("PIN must be exactly 4 digits.")
+                    attempts += 1
                     continue
-                
-                if self.__pin == input_pin:
+                if pin == self.__pin:
+                    print("Login successful.")
                     return True
                 else:
-                    print("INCORRECT PIN")
-                    continue
-
-                
+                    print(f"Incorrect PIN. {2 - attempts} attempt(s) remaining.")
+                    attempts += 1
             except ValueError:
-                print("Error: PIN must be digits only")
+                print("PIN must be digits only.")
+                attempts += 1
 
-            except Exception as e:
-                print(f"Error: {e}")
-    
-def main_menu():
+        print("Too many failed attempts. Access denied.")
+        return False
 
-    """ This displays main menu for this account """
 
-    print("\n--MAIN MENU--")
-    print("1.Display Details\n2.Deposit\n3.Withdraw\n4.Check Balance\n5.Logout")
+def show_menu() -> None:
+    print("\n---- MAIN MENU ----")
+    options: list[tuple[int, str]] = [
+        (1, "Display Details"),
+        (2, "Deposit"),
+        (3, "Withdraw"),
+        (4, "Check Balance"),
+        (5, "Logout"),
+    ]
+    for option, action in options:
+        print(f"{option}. {action}")
 
-def menu_return() -> bool :
 
-    """ Helps to choose user to return to main menu or not """
+def ask_return_to_menu() -> bool:
+    """Returns True to continue, False to exit."""
     while True:
-        exit_choice = input("Return to Main Menu? (y/n): ").lower()
-        if exit_choice == "y" or exit_choice == "yes":
+        choice: str = input("\nReturn to Main Menu? (y/n): ").strip().lower()
+        if choice in ("y", "yes"):
             return True
-        elif exit_choice == "n" or exit_choice == "no":
-            print("Thanks for using System @ Code by ARSH")
+        elif choice in ("n", "no"):
+            print("Goodbye! — Made by Arsh")
             return False
         else:
-            print("INVALID INPUT")
+            print("Invalid input. Enter y or n.")
 
-if __name__ == "__main__" :
-    ac = Account(5001037423,"Arshdeep Singh", 89000, 9988776655, "abc@xyz.com", 9833)
-    if ac.login():
-        while True:
-            main_menu()
-            try:
-                op = int(input("Enter Choice[1-5]: "))
-                if op == 1:
-                    ac.show_details()
-                    if not menu_return():
-                        break
 
-                elif op == 2:
-                    ac.deposit()
-                    if not menu_return():
-                        break
+def main() -> None:
+    account = Account(
+        account_no=5001037423,
+        full_name="Arshdeep Singh",
+        balance=89000,
+        mobile_no=9988776655,
+        email="abc@xyz.com",
+        pin=9833
+    )
 
-                elif op == 3:
-                    ac.withdraw()
-                    if not menu_return():
-                        break
+    if not account.login():
+        return
 
-                elif op == 4:
-                    print(f"\nCurrent Balance: ₹{ac.get_bal()}")
-                    if not menu_return():
-                        break
+    while True:
+        show_menu()
+        try:
+            choice: int = int(input("Enter choice (1-5): "))
 
-                elif op == 5:
-                    print("Thanks for using System @ Code by ARSH")
-                    break
+            if choice == 1:
+                account.show_details()
+            elif choice == 2:
+                account.deposit()
+            elif choice == 3:
+                account.withdraw()
+            elif choice == 4:
+                print(f"\nCurrent Balance: ₹{account.get_balance()}")
+            elif choice == 5:
+                print("Thanks for using! — Made by Arsh")
+                break
+            else:
+                print("Invalid option. Please choose between 1 and 5.")
+                continue
 
-                else:
-                    print("Enter Valid Input")
-            except ValueError:
-                print("Input should be digit only")
-                            
-            except Exception as e:
-                print(f"Error: {e}")
+            if not ask_return_to_menu():
+                break
+
+        except ValueError:
+            print("Input must be a number.")
+
+
+if __name__ == "__main__":
+    main()
