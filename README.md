@@ -1,8 +1,8 @@
 # 🏦 Robust Banking Account Management System
 
-> A secure and robust **console-based banking application** built using **Python** and **Object-Oriented Programming (OOP)** principles to simulate real-world banking operations through a modular and maintainable architecture.
+> A secure and robust **console-based banking application** built using **C++ (C++17/20)** and **Object-Oriented Programming (OOP)** principles to simulate real-world banking operations through a modular and maintainable architecture.
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
+![C++](https://img.shields.io/badge/C++-17%20%7C%2020-blue?style=for-the-badge&logo=c%2B%2B)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-success?style=for-the-badge)
 ![OOP](https://img.shields.io/badge/OOP-Implemented-orange?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
@@ -13,16 +13,18 @@
 
 # 📖 Overview
 
-The **Robust Banking Account Management System** is a command-line banking application that demonstrates real-world software development using **Python** and **Object-Oriented Programming (OOP)**.
+The **Robust Banking Account Management System** is a command-line banking application developed in **C++** to demonstrate real-world software engineering concepts using **Object-Oriented Programming (OOP)**.
 
-The project emphasizes secure authentication, encapsulation of sensitive data, exception handling, and modular software design while providing essential banking functionalities through an interactive command-line interface.
+The project emphasizes secure authentication, encapsulation of sensitive account data, inheritance, runtime polymorphism, exception-safe programming practices, and modular software design while providing essential banking functionalities through an interactive command-line interface.
 
 ### Core Concepts Implemented
 
 - Object-Oriented Programming (OOP)
+- Abstraction
 - Encapsulation
+- Inheritance
+- Runtime Polymorphism
 - Authentication System
-- Exception Handling
 - Input Validation
 - Modular Programming
 - Clean & Maintainable Code
@@ -35,19 +37,21 @@ The project emphasizes secure authentication, encapsulation of sensitive data, e
 
 ✅ Maximum 3 Login Attempts
 
-✅ Deposit Money
+✅ Savings & Current Account Support
 
-✅ Withdraw Money
+✅ Deposit Funds
+
+✅ Withdraw Funds
 
 ✅ Check Account Balance
 
-✅ View Account Details
+✅ Display Account Information
 
-✅ Private Balance & PIN using Encapsulation
+✅ Runtime Polymorphism using Virtual Functions
+
+✅ Dynamic Account Selection
 
 ✅ Strong Input Validation
-
-✅ Exception Handling
 
 ✅ Interactive CLI Menu
 
@@ -55,10 +59,12 @@ The project emphasizes secure authentication, encapsulation of sensitive data, e
 
 # 🛠 Technologies Used
 
-- **Python 3.13**
+- **C++17 / C++20**
 - Object-Oriented Programming (OOP)
-- Exception Handling
+- Runtime Polymorphism
+- Inheritance
 - Encapsulation
+- Exception-Safe Programming
 - Command Line Interface (CLI)
 
 ---
@@ -68,7 +74,7 @@ The project emphasizes secure authentication, encapsulation of sensitive data, e
 ```text
 Banking-System/
 │
-├── banking.py
+├── banking.cpp
 ├── README.md
 └── LICENSE (Optional)
 ```
@@ -77,14 +83,14 @@ Banking-System/
 
 # 🧩 Object-Oriented Design
 
-This project demonstrates the practical implementation of fundamental OOP principles.
+This project demonstrates the practical implementation of the four fundamental OOP principles.
 
 | Principle | Implementation |
 |-----------|----------------|
-| **Encapsulation** | Balance and PIN are stored as private attributes. |
-| **Abstraction** | Banking operations are exposed through simple methods while hiding implementation details. |
-| **Modularity** | Banking functionalities are organized into reusable class methods. |
-| **Reusability** | Class-based architecture makes future extensions straightforward. |
+| **Abstraction** | Abstract interface (`AccountInterface`) defines common banking operations. |
+| **Encapsulation** | Account balance and PIN are protected using private and protected members. |
+| **Inheritance** | `SavingsAccount` and `CurrentAccount` inherit from `BankAccount`. |
+| **Polymorphism** | Virtual functions allow runtime selection of account-specific behavior. |
 
 ---
 
@@ -94,6 +100,11 @@ This project demonstrates the practical implementation of fundamental OOP princi
                 +----------------+
                 |    Start App   |
                 +-------+--------+
+                        |
+                        ▼
+             +----------------------+
+             | Select Account Type  |
+             +----------+-----------+
                         |
                         ▼
               +------------------+
@@ -108,15 +119,14 @@ This project demonstrates the practical implementation of fundamental OOP princi
  +------------------+         Attempts < 3 ?
  |    Main Menu     |              |
  +------------------+              |
- | 1. Details       |              |
+ | 1. Balance       |              |
  | 2. Deposit       |              |
  | 3. Withdraw      |              |
- | 4. Balance       |              |
- | 5. Logout        |              |
+ | 4. Exit          |              |
  +--------+---------+              |
           |                        |
           ▼                        ▼
- Perform Banking           Login Failed
+ Perform Banking           Account Locked
    Operations                     |
           |                       |
           +-----------+-----------+
@@ -130,12 +140,13 @@ This project demonstrates the practical implementation of fundamental OOP princi
 # 📊 Application Modules
 
 - Authentication
+- Savings Account
+- Current Account
 - Deposit Management
 - Withdrawal Management
 - Balance Inquiry
-- Account Details
 - Input Validation
-- Exception Handling
+- Runtime Polymorphism
 
 ---
 
@@ -143,24 +154,22 @@ This project demonstrates the practical implementation of fundamental OOP princi
 
 - Secure PIN Authentication
 - Maximum Login Attempt Limit
-- Private Variables (`__balance`, `__pin`)
+- Protected Account Information
 - Input Validation
 - Invalid Transaction Prevention
-- Exception Handling
-- Protected Account Data
+- Runtime Type Safety using `dynamic_cast`
 
 ---
 
 # 💻 Sample Menu
 
 ```text
-========== Banking Management System ==========
+========== APEX BANKING SYSTEM ==========
 
-1. Display Details
-2. Deposit
-3. Withdraw
-4. Check Balance
-5. Logout
+1. Check Balance
+2. Deposit Funds
+3. Withdraw Funds
+4. Exit
 
 Enter Choice:
 ```
@@ -171,9 +180,13 @@ Enter Choice:
 
 - Classes & Objects
 - Constructors
+- Abstract Classes
+- Virtual Functions
+- Function Overriding
+- Inheritance
 - Encapsulation
-- Methods
-- Exception Handling
+- Runtime Polymorphism
+- Dynamic Casting (`dynamic_cast`)
 - Input Validation
 - Conditional Statements
 - Loops
@@ -183,16 +196,17 @@ Enter Choice:
 
 # 🚀 Future Improvements
 
-- SQLite / MySQL Integration
+- File-Based Data Persistence
 - Transaction History
-- Money Transfer Between Accounts
+- Account Number Generation
 - Interest Calculation
 - Change PIN Feature
 - Password Encryption
-- Admin Panel
-- GUI Version (Tkinter/PyQt)
-- Web Version using Flask/Django
-- REST API Integration
+- Multi-User Support
+- SQLite / MySQL Integration
+- GUI Version using Qt
+- REST API Backend
+- Web Version
 
 ---
 
@@ -200,12 +214,12 @@ Enter Choice:
 
 This project helped strengthen practical knowledge of:
 
-- Python Programming
+- C++ Programming
 - Object-Oriented Programming
 - Software Design
-- Exception Handling
-- User Authentication
-- Input Validation
+- Runtime Polymorphism
+- Inheritance
+- Encapsulation
 - CLI Application Development
 - Problem Solving
 - Modular Code Organization
@@ -218,7 +232,7 @@ This project helped strengthen practical knowledge of:
 
 **Computer Science Engineering Student**
 
-**Python Developer | Aspiring Software Engineer**
+**C++ Developer | Aspiring Software Engineer**
 
 > *"Learning by Building Real Projects."*
 
