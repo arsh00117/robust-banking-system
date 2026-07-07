@@ -109,7 +109,7 @@ int main() {
     bool isAuthenticated = false;
 
     cout << "========================================" << endl;
-    cout << "      WELCOME TO APEX BANKING SYSTEM    " << endl;
+    cout << "      WELCOME TO ARSH BANKING SYSTEM    " << endl;
     cout << "========================================" << endl;
 
     int accType;
